@@ -8,3 +8,4 @@ elapsedseconds=$SECONDS
 # TODO Parse this into something meaningful
 echo "Finished ${title} after ${elapsedseconds} seconds"
 echo "${start_date}: ${title} - ${elapsedseconds} seconds" >> ~/timelog.txt
+
