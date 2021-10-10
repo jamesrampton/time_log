@@ -26,4 +26,4 @@ done
 stty sane # Return to normal operation
 elapsedseconds=$SECONDS
 echo "Finished ${title} after $(displaytime $elapsedseconds)"
-echo "${start_date}: ${title} - $(displaytime $elapsedseconds)" >> ~/timelog.txt
+echo "${start_date}: ${title} - $(displaytime $elapsedseconds)" >> ~/tl_sessions.log
