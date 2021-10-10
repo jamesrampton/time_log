@@ -2,6 +2,8 @@
 
 prog_name=$(basename $0)
 
+log_file=~/tl_sessions.log
+
 function display_time {
     local time=$1
     local hours=$((time/60/60))
@@ -33,7 +35,11 @@ sub_log() {
     stty sane # Return to normal operation
     elapsed_seconds=$SECONDS
     echo "Finished ${title} after $(display_time $elapsed_seconds)"
-    echo "${start_date}: ${title} - $(display_time $elapsed_seconds)" >> ~/tl_sessions.log
+    echo "${start_date}: ${title} - $(display_time $elapsed_seconds)" >> $log_file
+}
+
+sub_list() {
+    cat $log_file
 }
 
 subcommand=$1
@@ -44,7 +50,7 @@ case $subcommand in
     *)
         shift
         case $subcommand in
-            "log")
+            "log" | "list")
                 sub_${subcommand} $@
                 ;;
             *)
