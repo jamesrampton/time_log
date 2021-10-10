@@ -11,8 +11,19 @@ function displaytime {
 title="$*"
 SECONDS=0
 start_date=$(date "+%F %T")
-echo "${title} started at ${start_date}"
-read -r -p"Press enter to finish this time session. "
+echo "Started ${title} at ${start_date}"
+echo "Press Enter to log this session"
+stty -echo -icanon time 0 min 0 # Don't wait when reading input
+while true
+do
+    printf "$(displaytime $SECONDS)   \r"
+    read key
+    if [ $? -eq 0 ] && [ -z "$key" ]
+    then
+        break
+    fi
+done
+stty sane # Return to normal operation
 elapsedseconds=$SECONDS
 echo "Finished ${title} after $(displaytime $elapsedseconds)"
 echo "${start_date}: ${title} - $(displaytime $elapsedseconds)" >> ~/timelog.txt
