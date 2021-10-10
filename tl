@@ -43,11 +43,13 @@ case $subcommand in
         ;;
     *)
         shift
-        sub_${subcommand} $@
-        if [ $? = 127 ]; then
-            echo "Error: '$subcommand' is not a known command." >&2
-            echo "       Run '$prog_name --help' for a list of known commands." >&2
-            exit 1
-        fi
-        ;;
+        case $subcommand in
+            "log")
+                sub_${subcommand} $@
+                ;;
+            *)
+                echo "Error: '$subcommand' is not a known command." >&2
+                echo "       Run '$prog_name --help' for a list of known commands." >&2
+                exit 1
+        esac
 esac
