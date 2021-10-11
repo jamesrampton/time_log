@@ -25,6 +25,7 @@ sub_log() {
     stty -echo -icanon time 0 min 0 # Don't wait when reading input
     while true
     do
+        sleep 0.1
         printf "$(display_time $SECONDS)   \r"
         read key
         if [ $? -eq 0 ] && [ -z "$key" ]
